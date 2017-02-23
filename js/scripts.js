@@ -19,7 +19,24 @@ function getSymbol(number) {
   return romanSymbol;
 };
 
+function getNumeral(number) {
+  var lesserNumeral = 0;
+  var greaterNumeral = 0;
+  for (var i = 0; i < numerals.length; i++) {
+    if (numerals[i].value <= number) {
+      lesserNumeral = numerals[i].value;
+    }
+    else {
+      greaterNumeral = numerals[i].value;
+      break;
+    }
+  }
+  console.log(lesserNumeral);
+  console.log(greaterNumeral);
+}
+
 function romanNumeral(userNumber) {
+  getNumeral(userNumber);
   var roman = getSymbol(parseInt(userNumber));
   return roman;
 };
