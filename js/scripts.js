@@ -31,12 +31,41 @@ function getNumeral(number) {
       break;
     }
   }
-  console.log(lesserNumeral);
-  console.log(greaterNumeral);
+  return [lesserNumeral, greaterNumeral]
+
+}
+
+function splitNumber(number) {
+  var numerals = getNumeral(number);
+  var difference = number - numerals[0];
+  var diffNumerals = getNumeral(difference);
+  var diffNumeralCount = difference / diffNumerals[0];
+  var returnArray = [];
+  if (diffNumeralCount <= 3) {
+    returnArray.push(numerals[0]);
+    for (var i = 0; i < diffNumeralCount; i++) {
+      returnArray.push(diffNumerals[0]);
+    }
+  } else {
+    for (var i = 0; i < 5-diffNumeralCount; i++) {
+      returnArray.push(diffNumerals[0]);
+    }
+    returnArray.push(numerals[1]);
+  }
+  return returnArray;
+}
+
+function separateNumber(number) {
+  var numberPlaces = [];
+  for (var i = 0; i < number.length; i++) {
+    numberPlaces.push(number.charAt(i)+"0".repeat(number.length-(i+1)));
+    // console.log(number.charAt(i)+"0".repeat(number.length-(i+1)));
+  };
+  console.log(numberPlaces);
 }
 
 function romanNumeral(userNumber) {
-  getNumeral(userNumber);
+  separateNumber(userNumber);
   var roman = getSymbol(parseInt(userNumber));
   return roman;
 };
