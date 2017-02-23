@@ -37,23 +37,25 @@ function getNumeral(number) {
 
 function splitNumber(number) {
   var numerals = getNumeral(number);
-  var difference = number - numerals[0];
+  var difference = numerals[1] - number;
   var diffNumerals = getNumeral(difference);
   var diffNumeralCount = difference / diffNumerals[0];
   var returnArray = [];
   var symbols = "";
-  if (difference === 0) {
+  if (number === numerals[0]) {
     returnArray.push(number);
-  } else if (diffNumeralCount <= 3) {
-    returnArray.push(numerals[0]);
+  } else if (diffNumeralCount === 1) {
     for (var i = 0; i < diffNumeralCount; i++) {
       returnArray.push(diffNumerals[0]);
     }
+    returnArray.push(numerals[1]);
   } else {
-    for (var i = 0; i < 5-diffNumeralCount; i++) {
+    if (numerals[0] > diffNumerals[0]) {
+      returnArray.push(numerals[0]);
+    }
+    for (var i = 0; i < 5 - diffNumeralCount; i++) {
       returnArray.push(diffNumerals[0]);
     }
-    returnArray.push(numerals[1]);
   }
   returnArray.forEach(function(num) {
     symbols = symbols + getSymbol(num);
