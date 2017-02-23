@@ -61,7 +61,7 @@ function splitNumber(number) {
   return symbols;
 }
 
-function separateNumber(number) {
+function romanNumeral(number) {
   var numberPlaces = [];
   var romanSymbols = "";
   for (var i = 0; i < number.length; i++) {
@@ -74,11 +74,6 @@ function separateNumber(number) {
   })
   return romanSymbols;
 }
-
-function romanNumeral(userNumber) {
-  var roman = separateNumber(userNumber);
-  return roman;
-};
 
 // Front-End
 $(function() {
