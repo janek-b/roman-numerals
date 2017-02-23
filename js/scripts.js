@@ -41,7 +41,10 @@ function splitNumber(number) {
   var diffNumerals = getNumeral(difference);
   var diffNumeralCount = difference / diffNumerals[0];
   var returnArray = [];
-  if (diffNumeralCount <= 3) {
+  var symbols = "";
+  if (difference === 0) {
+    returnArray.push(number);
+  } else if (diffNumeralCount <= 3) {
     returnArray.push(numerals[0]);
     for (var i = 0; i < diffNumeralCount; i++) {
       returnArray.push(diffNumerals[0]);
@@ -52,21 +55,28 @@ function splitNumber(number) {
     }
     returnArray.push(numerals[1]);
   }
-  return returnArray;
+  returnArray.forEach(function(num) {
+    symbols = symbols + getSymbol(num);
+  })
+  return symbols;
 }
 
 function separateNumber(number) {
   var numberPlaces = [];
+  var romanSymbols = "";
   for (var i = 0; i < number.length; i++) {
-    numberPlaces.push(number.charAt(i)+"0".repeat(number.length-(i+1)));
-    // console.log(number.charAt(i)+"0".repeat(number.length-(i+1)));
+    if (number.charAt(i) != 0) {
+      numberPlaces.push(number.charAt(i)+"0".repeat(number.length-(i+1)));
+    }
   };
-  console.log(numberPlaces);
+  numberPlaces.forEach(function(num) {
+    romanSymbols = romanSymbols + splitNumber(parseInt(num));
+  })
+  return romanSymbols;
 }
 
 function romanNumeral(userNumber) {
-  separateNumber(userNumber);
-  var roman = getSymbol(parseInt(userNumber));
+  var roman = separateNumber(userNumber);
   return roman;
 };
 
